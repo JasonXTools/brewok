@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Search - Secure Download</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #050505;
+            background-image: radial-gradient(circle at center, #1a0000 0%, #000 70%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Logo Styling */
+        .logo-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .logo-wrapper img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 0 25px rgba(230, 0, 0, 0.6);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Teks Created By */
+        .created-by {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 35px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        .created-by span {
+            color: #e60000;
+            text-shadow: 0 0 10px rgba(230, 0, 0, 0.5);
+        }
+
+        /* Bar Download (Link) */
+        .download-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: #fff;
+            padding: 25px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #000;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid transparent;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(230, 0, 0, 0.3);
+            border-color: #e60000;
+        }
+
+        .dl-text {
+            font-size: 42px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .file-size {
+            font-size: 18px;
+            font-weight: 600;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 2px solid #ddd;
+            padding-left: 25px;
+        }
+
+        .file-size i {
+            color: #e60000;
+        }
+
+        /* File Info Section */
+        .info-section {
+            width: 100%;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .info-header {
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            border-bottom: 2px solid #e60000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table tr {
+            border-bottom: 1px solid #333;
+            transition: background 0.2s;
+        }
+
+        .info-table tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .info-table td {
+            padding: 15px 10px;
+            font-size: 15px;
+        }
+
+        .info-table td:first-child {
+            color: #888;
+            font-weight: 600;
+            width: 35%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-table td:first-child i {
+            color: #e60000;
+            width: 20px;
+            text-align: center;
+        }
+
+        .info-table td:last-child {
+            color: #fff;
+            font-weight: 400;
+        }
+
+        .badge {
+            background: #e60000;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsif */
+        @media (max-width: 600px) {
+            .download-btn {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+            .dl-text { font-size: 32px; }
+            .file-size {
+                border-left: none;
+                padding-left: 0;
+                border-top: 2px solid #ddd;
+                padding-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            .info-table td {
+                display: block;
+                width: 100% !important;
+            }
+            .info-table td:first-child { padding-bottom: 5px; }
+            .info-table td:last-child { padding-top: 0; padding-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo-wrapper">
+            <img src="https://files.catbox.moe/owov6r.jpg" alt="Cyber Search Logo">
+        </div>
+
+        <!-- Judul -->
+        <div class="created-by">Created By <span>CYBER SEARCH</span></div>
+
+        <!-- 
+            TOMBOL DOWNLOAD (HTML MURNI)
+            Data JSON sudah di-encode ke Base64/URI. 
+            Saat diklik, browser langsung mengunduh file tanpa JavaScript.
+        -->
+        <a href="data:application/json;charset=utf-8,%7B%0A%20%20%22profil_pribadi%22%3A%20%7B%0A%20%20%20%20%22Foto_Pribadi%22%3A%20%22https%3A%2F%2Ffiles.catbox.moe%2Fhauuv9.jpg%22%2C%0A%20%20%20%20%22nama_panggilan%22%3A%20%22Ahlil%22%2C%0A%20%20%20%20%22nama_lengkap%22%3A%20%22Ahlil%20Gazali%22%2C%0A%20%20%20%20%22jenis_kelamin%22%3A%20%22Laki-laki%22%2C%0A%20%20%20%20%22agama%22%3A%20%22Islam%22%2C%0A%20%20%20%20%22kewarganegaraan%22%3A%20%22Indonesia%20(WNI)%22%2C%0A%20%20%20%20%22tempat_lahir%22%3A%20%22Pemalang%2C%20Jawa%20Tengah%22%2C%0A%20%20%20%20%22Tahun_lahir%22%3A%20%222014%22%2C%0A%20%20%20%20%22status_keluarga%22%3A%20%22Anak%20terakhir%22%2C%0A%20%20%20%20%22email_pengguna%22%3A%20%22ahlilgazali%40gmail.com%22%2C%0A%20%20%20%20%22nomor_Handphone%22%3A%20%22%2B6287746084809%22%2C%0A%20%20%20%20%22operator_nomor%22%3A%20%22XL%20Axiata%22%2C%0A%20%20%20%20%22jumlah_saudara%22%3A%203%2C%0A%20%20%20%20%22jenis_saudara%22%3A%20%22Perempuan%2C%20Dan%20Laki-laki%22%2C%0A%20%20%20%20%22bahasa_sehari_hari%22%3A%20%5B%22Bahasa%20Jawa%22%5D%2C%0A%20%20%20%20%22alamat%22%3A%20%7B%0A%20%20%20%20%20%20%22dusun%22%3A%20%22Ndukuh%22%2C%0A%20%20%20%20%20%20%22desa%22%3A%20%22Widuri%22%2C%0A%20%20%20%20%20%20%22Jalan%22%3A%20%22JL.Mujaher%22%2C%0A%20%20%20%20%20%20%22kecamatan%22%3A%20%22Widuri%22%2C%0A%20%20%20%20%20%20%22kabupaten%22%3A%20%22Pemalang%22%2C%0A%20%20%20%20%20%20%22provinsi%22%3A%20%22Jawa%20Tengah%22%2C%0A%20%20%20%20%20%20%22negara%22%3A%20%22Indonesia%22%2C%0A%20%20%20%20%20%20%22latitude%22%3A%20-6.865195%2C%0A%20%20%20%20%20%20%22longitude%22%3A%20109.376680%0A%20%20%20%20%7D%0A%20%20%7D%2C%0A%20%20%22data_orang_tua%22%3A%20%7B%0A%20%20%20%20%22ibu%22%3A%20%7B%0A%20%20%20%20%20%20%22nama%22%3A%20%22Unyil%22%2C%0A%20%20%20%20%20%20%22agama%22%3A%20%22Islam%22%2C%0A%20%20%20%20%20%20%22pekerjaan%22%3A%20%22Pengangguran%22%0A%20%20%20%20%7D%2C%0A%20%20%20%20%22bapak%22%3A%20%7B%0A%20%20%20%20%20%20%22nama%22%3A%20%22Naryoh%22%2C%0A%20%20%20%20%20%20%22agama%22%3A%20%22Islam%22%2C%0A%20%20%20%20%20%20%22pekerjaan%22%3A%20%22Teknisi%20Listrik%22%0A%20%20%20%20%7D%0A%20%20%7D%2C%0A%20%20%22pendidikan%22%3A%20%7B%0A%20%20%20%20%22sekolah%22%3A%20%22MTs%20Mathlaul%20Anwar%20Sugihwaras%22%2C%0A%20%20%20%20%22jenjang%22%3A%20%22Madrasah%20Tsanawiyah%20(setara%20SMP)%22%2C%0A%20%20%20%20%22status_sekolah%22%3A%20%22Swasta%22%2C%0A%20%20%20%20%22npsn%22%3A%20%2220364621%22%2C%0A%20%20%20%20%22alamat_sekolah%22%3A%20%22Sugihwaras%2C%20Tanjungsari%2C%20Pemalang%22%2C%0A%20%20%20%20%22kabupaten%22%3A%20%22Pemalang%22%2C%0A%20%20%20%20%22provinsi%22%3A%20%22Jawa%20Tengah%22%2C%0A%20%20%20%20%22koordinat%22%3A%20%7B%0A%20%20%20%20%20%20%22latitude%22%3A%20-6.8658%2C%0A%20%20%20%20%20%20%22longitude%22%3A%20109.372%0A%20%20%20%20%7D%0A%20%20%7D%2C%0A%20%20%22lokasi_zona_waktu%22%3A%20%7B%0A%20%20%20%20%22zona_waktu%22%3A%20%22WIB%20(UTC%2B7)%22%2C%0A%20%20%20%20%22koordinat%22%3A%20%7B%0A%20%20%20%20%20%20%22latitude%22%3A%20%226%C2%B053'%20LS%22%2C%0A%20%20%20%20%20%20%22longitude%22%3A%20%22109%C2%B022'%20BT%22%0A%20%20%20%20%7D%2C%0A%20%20%20%20%22provinsi%22%3A%20%22Jawa%20Tengah%22%2C%0A%20%20%20%20%22kabupaten%22%3A%20%22Pemalang%22%2C%0A%20%20%20%20%22kecamatan%22%3A%20%22Pemalang%22%2C%0A%20%20%20%20%22desa%22%3A%20%22Ndukuh%22%2C%0A%20%20%20%20%22dusun%22%3A%20%22Widuri%22%2C%0A%20%20%20%20%22ketinggian_mdpl%22%3A%20%225-50%22%2C%0A%20%20%20%20%22iklim%22%3A%20%22Tropis%20basah%22%2C%0A%20%20%20%20%22suhu_celsius%22%3A%20%2226-32%22%2C%0A%20%20%20%20%22curah_hujan%22%3A%20%22Tinggi%22%0A%20%20%7D%2C%0A%20%20%22kondisi_lingkungan%22%3A%20%7B%0A%20%20%20%20%22tipe_wilayah%22%3A%20%22Pedesaan%20%2F%20pesisir%20pantura%22%2C%0A%20%20%20%20%22mata_pencaharian_umum%22%3A%20%5B%22Petani%22%2C%20%22Nelayan%22%2C%20%22Pedagang%22%5D%2C%0A%20%20%20%20%22fasilitas_ibadah%22%3A%20%5B%22Masjid%22%2C%20%22Mushola%20desa%22%5D%2C%0A%20%20%20%20%22akses_listrik%22%3A%20%22Tersedia%20(PLN)%22%2C%0A%20%20%20%20%22akses_internet%22%3A%20%22Tersedia%20(jaringan%20seluler)%22%0A%20%20%7D%0A%7D" 
+           download="ahlil_gazali.json" 
+           class="download-btn">
+            <div class="dl-text">Download</div>
+            <div class="file-size">
+                <i class="fas fa-file-code"></i> 1.9 KB
+            </div>
+        </a>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-header">File Information</div>
+            <table class="info-table">
+                <tr>
+                    <td><i class="fas fa-file-alt"></i> Nama File</td>
+                    <td>ahlil_gazali.json <span class="badge">JSON</span></td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-weight-hanging"></i> Ukuran File</td>
+                    <td>1.9 KB (1,945 bytes)</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-lock"></i> Keamanan</td>
+                    <td>Terenkripsi & Aman</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-user-secret"></i> Sumber</td>
+                    <td>Cyber Search Intelligence</td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-info-circle"></i> Deskripsi</td>
+                    <td>Data Pribadi Ahlil Gazali (Pemalang)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
